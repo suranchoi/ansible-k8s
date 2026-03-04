@@ -146,5 +146,5 @@
         value: 1
 
     - name: Hold kubelet, kubeadm, kubectl package
-      command: sudo apt-mark hold kubelet, kubeadm, kubectl
+      command: sudo apt-mark hold kubelet kubeadm kubectl
       changed_when: false
