@@ -1,23 +1,18 @@
 - name: Get join command from master
-  hosts: all
+  hosts: hks02-master
   become: true
   tasks:
     - name: Generate join command
       ansible.builtin.command: kubeadm token create --print-join-command
       register: join_command
-      when: "'master' in group_names"
 
-    - name: Share join command as fact
+    - name: Set join command fact       
       ansible.builtin.set_fact:
         join_cmd: "{{ join_command.stdout }}"
-        cacheable: true
-      when: "'master' in group_names"
 
-# Play 2: worker에서 join 실행
 - name: Join worker to cluster
-  hosts: all
+  hosts: npu_server
   become: true
   tasks:
     - name: Execute join command
-      ansible.builtin.command: "{{ hostvars[groups['master'][0]]['join_cmd'] }}"
-      when: "'workers' in group_names"
+      ansible.builtin.command: "{{ hostvars['hks02-master']['join_cmd'] }}"
