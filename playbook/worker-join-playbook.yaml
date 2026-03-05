@@ -1,5 +1,5 @@
 - name: Get join command from master
-  hosts: hks02-master
+  hosts: master
   become: true
   tasks:
     - name: Generate join command
@@ -11,7 +11,7 @@
         join_cmd: "{{ join_command.stdout }}"
 
 - name: Join worker to cluster
-  hosts: npu_server
+  hosts: workers
   become: true
   tasks:
     - name: Execute join command
