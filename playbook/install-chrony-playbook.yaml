@@ -1,9 +1,0 @@
-- name: Install chrony
-  hosts: workers
-  become: true
-  tasks:
-    - name: Gather facts
-      ansible.builtin.setup:
-
-    - name: Install Chrony package
-      ansible.builtin.shell: apt install chrony
