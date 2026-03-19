@@ -5,7 +5,7 @@
     - name: Get join command from master via delegate
       ansible.builtin.command: kubeadm token create --print-join-command
       register: join_command
-      delegate_to: 192.168.2.10    # master IP 직접 지정
+      delegate_to: 192.168.2.220    # master IP 직접 지정
       vars:
         ansible_user: root                                         
         ansible_ssh_private_key_file: /opt/morpheus/.local/.ssh/id_rsa   
